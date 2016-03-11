@@ -1,9 +1,14 @@
 # innovidCellar
-usage:
+usage  
+
  $ brew tap viggin543/innovidCellar
+ 
  $ brew install InnovidCellar
+ 
  $ tip
 
 
 
- enjoy and feel free to add more stuff ^_^
+ enjoy and feel free to add more usefull stuff ^_^
+ 
+ this repo will contain goodies and usefull stuff like the tip script 
