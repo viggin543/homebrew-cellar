@@ -1,11 +1,11 @@
 # innovidCellar
 usage  
 
- $ brew tap viggin543/innovidCellar
+ `$ brew tap viggin543/innovidCellar`
  
- $ brew install InnovidCellar
+ `$ brew install InnovidCellar`
  
- $ tip
+ `$ tip`
 
 
 # enjoy and feel free to add more usefull stuff ^_^
