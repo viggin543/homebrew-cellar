@@ -1,5 +1,5 @@
-# innovidCellar
-usage
+
+#usage
 
  `$ brew tap viggin543/hombrew-innovidcellar`
  
