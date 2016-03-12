@@ -8,7 +8,7 @@ OUTFILE=git-clone-out.$$
 if git clone "$@" --progress 2>&1 | tee ${OUTFILE} ; then
     DIR=`grep '^Cloning into ' "${OUTFILE}" | sed -e "s#^Cloning into '\(.*\)'\.\.\..*#\1#"`
     rm ${DIR}/.git/hooks/*.sample
-    for HOOK in ${HOME}/bin/git-hooks/* ; do
+    for HOOK in /usr/local/etc/git-hooks/* ; do
         ln -s "${HOOK}" "${DIR}/.git/hooks/"
         if [ $? != 0 ]; then
             cp "${HOOK}" "${DIR}/.git/hooks/"
