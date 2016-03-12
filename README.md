@@ -11,7 +11,7 @@ usage
  
  `$ tip` 
 
- `$ clone  => will clone a repository using pre-push and prepare-commit-msg hooks . integrated with crucibot`
+ `$ clone  => will clone a repository integrated with pre-push , prepare-commit-msg hooks , crucibot`
  
  ```^___^```
 
