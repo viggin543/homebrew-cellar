@@ -10,6 +10,7 @@ usage
  `$ tip` 
 
  `$ clone git@bitbucket.org:innovid/mobile-apps.git  =>`
+ 
  `this will clone the mobile-apps repo . set .git/hooks/* -> usr/local/etc/git-hooks/* with crucibot asking for a code review b4 push` 
  
  ```^___^```
