@@ -5,13 +5,12 @@ usage
  
  `$ brew install tip`
  
- `$ brew install crucibot`
- 
- `$ brew install hooks` 
+ `$ brew install hooks => everything you need to install all the git-hooks and crucibot`   
  
  `$ tip` 
 
- `$ clone  => will clone a repository integrated with pre-push , prepare-commit-msg hooks , crucibot`
+ `$ clone git@bitbucket.org:innovid/mobile-apps.git  =>`
+ `this will clone the mobile-apps repo . set .git/hooks/* -> usr/local/etc/git-hooks/* with crucibot asking for a code review b4 push` 
  
  ```^___^```
 
