@@ -8,7 +8,7 @@ usage
  `$ tip`
 
 
-# enjoy and feel free to add more usefull stuff ^_^
+# enjoy and feel free to add more  stuff ^_^
  
 # this repo will contain goodies and usefull stuff like the tip script 
 
