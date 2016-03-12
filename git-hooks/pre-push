@@ -1,0 +1,36 @@
+#!/bin/bash
+echo pre push -  i am alive
+MASTER='master'
+ORIGIN=`git rev-parse --abbrev-ref HEAD`
+REPO=$(basename `git rev-parse --show-toplevel`)
+crucibot-pre-push-extend
+
+if [ ${REPO} = "dev" ]
+then
+	MASTER='innodev'
+fi
+if [ ${ORIGIN} = ${MASTER} ]
+then
+	exit 0
+else
+	`git checkout -q ${MASTER}`
+	UNMERGED_BRANCHES=`git branch --no-merged`
+	UNPUSHED_COMMITS=`git cherry -v`
+	`git checkout -q ${ORIGIN}`
+
+	#Check for unmerged changes from this branch to master
+	if [[ ${UNMERGED_BRANCHES} =~ .*${ORIGIN}.* ]]
+	then
+		echo "[Pre-Push Hook]: You have unmerged changes."
+		exit 1
+	fi
+
+	#Check for unpushed commits in master
+	if [ ! -z "${UNPUSHED_COMMITS}" ]
+	then
+		echo "[Pre-Push Hook]: You have unpushed changes in ${MASTER}, please push ${MASTER} commits first."
+		exit 1
+	fi
+fi
+
+exit 0
