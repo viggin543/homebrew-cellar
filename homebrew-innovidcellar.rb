@@ -2,12 +2,12 @@
 #                http://www.rubydoc.info/github/Homebrew/homebrew/master/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 
-class Innovidcellar < Formula
-  desc "usefull stuff"
+class HomebrewInnovidcellar < Formula
+  desc "usefull stuff and goodies"
   homepage "https://github.com/viggin543/innovidCellar"
-  url "https://github.com/viggin543/innovidCellar/archive/1.0.0.tar.gz"
-  version "1.0.0"
-  sha256 "43a2d43d799ba9a00c4583a5b865f85bf0f84b576509d4c26eca1b29a6853703"
+  url "https://github.com/viggin543/homebrew-innovidcellar/archive/1.1.0.tar.gz"
+  version "1.1.0"
+  sha256 "350e897bdc6263a197e18a0f58473db08b4a004db7ff7396c4d4899d1459551e"
 
   depends_on "pandoc"
   depends_on "xmlstarlet"
@@ -19,5 +19,4 @@ class Innovidcellar < Formula
     bin.install "tip"
     bin.install "crucibot"
   end
-
 end
