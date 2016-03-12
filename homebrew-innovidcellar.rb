@@ -16,5 +16,6 @@ class HomebrewInnovidcellar < Formula
   def install
     bin.install "tip"
     bin.install "crucibot"
+    bin.install "crucibot-pre-push-extend"
   end
 end
