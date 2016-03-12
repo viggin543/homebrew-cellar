@@ -1,9 +1,11 @@
 class Hooks < Formula
   desc 'usefull stuff and goodies'
-  homepage 'https://github.com/viggin543/homebrew-innovidcellar'
-  url 'https://github.com/viggin543/homebrew-innovidcellar/archive/1.2.3.tar.gz'
+  homepage 'http://github.com/viggin543/homebrew-innovidcellar'
+  url 'http://github.com/viggin543/homebrew-innovidcellar/archive/1.2.3.tar.gz'
   version '1.2.3'
   sha256 ''
+
+  depends_on "crucibot"
 
   def install
     bin.install 'clone'

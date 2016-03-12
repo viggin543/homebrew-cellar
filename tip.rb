@@ -4,7 +4,7 @@
 
 class Tip < Formula
   desc "usefull stuff and goodies"
-  homepage "https://github.com/viggin543/innovidCellar"
+  homepage "http://github.com/viggin543/homebrew-innovidcellar"
   url "http://github.com/viggin543/homebrew-innovidcellar/archive/1.1.1.zip"
   version "1.1.1"
   sha256 "5b40588a51feab410a473fa43bcacda61ecb8aa155424541b521493533e7ffee"
