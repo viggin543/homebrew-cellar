@@ -3,7 +3,9 @@ usage
 
  `$ brew tap viggin543/hombrew-innovidcellar`
  
- `$ brew install homebrew-innovidCellar`
+ `$ brew install tip`
+ 
+ `$ brew install crucibot`
  
  `$ tip` ,
  `$ crucibot` ,
