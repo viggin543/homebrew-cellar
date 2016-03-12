@@ -9,12 +9,15 @@ class Innovidcellar < Formula
   version "1.0.0"
   sha256 "43a2d43d799ba9a00c4583a5b865f85bf0f84b576509d4c26eca1b29a6853703"
 
-depends_on "pandoc"
-depends_on "xmlstarlet"
-depends_on "curl"
+  depends_on "pandoc"
+  depends_on "xmlstarlet"
+  depends_on "curl"
+  depends_on "colorize" => :ruby
+
 
   def install
     bin.install "tip"
+    bin.install "crucibot"
   end
 
 end

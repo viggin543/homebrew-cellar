@@ -1,0 +1,185 @@
+#!/usr/bin/env ruby
+require "net/http"
+require "uri"
+require 'json'
+require 'optparse'
+require 'colorize'
+
+
+##################  VARIABLES ##################
+credentials = {
+  :server => "codereview.inbake.com",
+  :username => ENV['CRUCIBLE_USER'],
+  :password => ENV['CRUCIBLE_PWD']
+}
+repo = ARGV[0]
+jira_issues = ARGV.join(" ")
+
+options = {}
+OptionParser.new do |opts|
+  opts.on('-j', '--jira-issues JIRA_ISSUES', 'The jira issues to attach the crucible reviews, comma separated') { |v| options[:jira_issues] = v.nil? ? nil : v.split(',').uniq }
+  opts.on('-p', '--patch-file PATCH_FILE', 'The patch file containing the commit diffs') { |v| options[:patch_file] = v }
+  opts.on('-r', '--repo REPOSITORY_NAME', 'The repository to create the review on') { |v| options[:repo] = v }
+end.parse!
+
+################## VALIDATION ##################
+if (ENV['CRUCIBLE_USER'].nil? || ENV['CRUCIBLE_PWD'].nil?)
+  puts "Yo, missing following environment variables: CRUCIBLE_USER and CRUCIBLE_PWD"
+  exit 1
+end
+
+raise ArgumentError, "Missing arguments, USAGE: crucibot --jira-issues JIRA_ISSUES --patch-file PATCH_FILE  --repo REPOSITORY_NAME" if (options[:jira_issues].nil? || options[:patch_file].nil? || options[:repo].nil?)
+
+
+################## DEFINITIONS ##################
+def httpPost(uri, payload, asRaw = true, asJson=true)
+  res = nil
+  begin
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.read_timeout = 3000
+    http.use_ssl = uri.scheme == 'https' ? true : false
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.add_field('Content-Type', 'application/json')
+    if (asRaw)
+        request.body = asJson ? payload.to_json : payload
+    else
+      request.set_form_data(payload)
+    end
+    response = http.request(request)
+    case response
+    when Net::HTTPSuccess
+      res = response
+    else
+      puts "Sorry, server responded with code: #{response.code}, body: #{response.body[0..200]}...".red
+    end
+  rescue Timeout::Error => e
+    puts "Server timeout, Error: #{e}".red
+  end
+  res
+end
+
+def httpGet(uri)
+  res = nil
+  begin
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.read_timeout = 3000
+    http.use_ssl = uri.scheme == 'https' ? true : false
+    request = Net::HTTP::Get.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
+    response = http.request(request)
+    case response
+    when Net::HTTPSuccess
+      res = response
+    else
+      puts "Sorry, server responded with code: #{response.code}, body: #{response.body[0..200]}...".red
+    end
+  rescue Timeout::Error => e
+    puts "Server timeout, Error: #{e}".red
+  end
+  res
+end
+
+def tryConnectToServer(credentials)
+  puts "Connecting to #{credentials[:server]}"
+  uri = URI.parse("https://#{credentials[:server]}/rest-service-fecru/auth/login")
+  payload = {"userName" => credentials[:username], "password" => credentials[:password]}
+  response = httpPost(uri, payload, false)
+  response.nil? ? nil : JSON.parse(response.body)['token']
+end
+
+def selectReviewers(credentials, token, io)
+  selectedReviewers = []
+  uri = URI.parse("https://#{credentials[:server]}/rest-service/users-v1.json?FEAUTH=#{token}")
+  response = httpGet(uri)
+  if (!response.nil?)
+    userData = JSON.parse(response.body)['userData']
+    optionalReviewers = userData.map { |user| user['userName']}
+    puts optionalReviewers.join(" | ")
+    print "Please choose reviewers from the above list (use comma separated list): ".cyan
+    selectedReviewers = io.gets.chomp.split(",").map {|r| r.strip}
+    unknownUsers = selectedReviewers - optionalReviewers
+    while (!unknownUsers.empty?)
+      print "#{unknownUsers.join(", ")} aren't valid reviewers, Please choose reviewers from the above list (use comma separated list): ".red
+      selectedReviewers = io.gets.chomp.split(",").map {|r| r.strip}
+      unknownUsers = selectedReviewers - optionalReviewers
+    end
+  end
+  selectedReviewers
+end
+
+def createReview(credentials, token, reviewData, patch)
+  maybeCreatedReview = nil
+  puts "Trying to create the review on remote server"
+  uri = URI.parse("https://#{credentials[:server]}/rest-service/reviews-v1.json?FEAUTH=#{token}")
+  response = httpPost(uri, {"reviewData" => reviewData, "patch" => patch})
+  response.nil? ? nil : JSON.parse(response.body)
+end
+
+def attachReviewers(credentials, token, reviewId, reviewers)
+  uri = URI.parse("https://#{credentials[:server]}/rest-service/reviews-v1/#{reviewId}/reviewers.json?FEAUTH=#{token}")
+  response = httpPost(uri, reviewers.join(","), true, false)
+  response.nil? ? false : true
+end
+
+
+################## EXECUTION ##################
+fd = IO.sysopen('/dev/tty', 'r')
+io = IO.new(fd)
+
+puts "Hi #{credentials[:username]}, i'm crucibot! ".cyan
+
+if (options[:jira_issues].length > 1)
+  puts "The Jira issues in your push are #{options[:jira_issues]}".red
+  puts "Multiple jira issues is something I'm not messing with at the moment, skipping automatic code review...".red
+  exit 0
+end
+
+jiraIssue = options[:jira_issues][0]
+
+print "Would you like me to create a code review task for #{jiraIssue}? [y/n] ".cyan
+
+continue = io.gets
+while (continue.nil? || (!(continue.chomp.eql? "y") && !(continue.chomp.eql? "n")))
+  print "Didn't understand you, Would you like me to create a code review task for #{jiraIssue}? [y/n] ".cyan
+  continue = io.gets
+end
+
+if (continue.chomp.eql? "n")
+   puts "Care for your code! review it.".red
+else #Continue with code review
+    token = tryConnectToServer(credentials)
+    if (!token.nil?)
+
+      reviewers = selectReviewers(credentials, token, io)
+      print "Please give a meaningful name for your review, so that your reviewers will know what it is: ".cyan
+      reviewName = io.gets.chomp
+      reviewData = {
+        "projectKey" => "#{options[:repo]}",
+        "name" => reviewName,
+        "author" => {
+          "userName" => credentials[:username]
+        },
+        "creator" => {
+          "userName" => credentials[:username]
+        },
+        "state" => "Review",
+        "type" => "REVIEW",
+        "jiraIssueKey" => jiraIssue
+      }
+      patch = File.read(options[:patch_file])
+      review = createReview(credentials, token, reviewData, patch)
+      if (!review.nil?)
+        reviewId = review['permaId']['id']
+        puts "Review has been created, attching reviewers..."
+        if (attachReviewers(credentials, token, reviewId, reviewers))
+          puts "Review has been created successfully, your review id is #{reviewId} waiting for #{reviewers} to do the code review".cyan
+        else
+          puts "Review #{reviewId} has been created but I've failed to attach reviewers to it".red
+        end
+      end
+
+    end
+end
+
+puts "crucibot is going to sleep now... C Ya on next push".cyan
+
+
