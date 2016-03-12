@@ -10,8 +10,8 @@ class Hooks < Formula
     hooks = Dir.home+"/bin/git-hooks"
   unless File.exist?(hooks)
     FileUtils.mv('./git-hooks', hooks)
-    Dir.entries(hooks).reject { |file| %w(. ..).include?(file) or file[0..-1].include?('.') }.each
-    { |hook| FileUtils.chmod('+x', hook) }
+    Dir.entries(hooks).reject { |file| %w(. ..).include?(file) or file[0..-1].include?('.') }.each { |hook|
+      FileUtils.chmod('+x', hook) }
   end
 
   end
