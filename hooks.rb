@@ -7,9 +7,11 @@ class Hooks < Formula
 
   def install
     bin.install 'clone'
-    bin.install 'git-hooks'
-    # hooks = ENV[["HOME", "HOMEPATH"].detect {|h| ENV[h] != nil}]+"/bin/git-hooks"
-    # FileUtils.mv('./git-hooks', hooks) unless File.exist?(hooks)
+    hooks = Dir.home+"/bin/git-hooks"
+  unless File.exist?(hooks)
+    FileUtils.mv('./git-hooks', hooks)
+    Dir.entries(hooks) { |hook| FileUtils.chmod('+x', hook) }
+  end
 
   end
 end
