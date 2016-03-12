@@ -1,4 +1,4 @@
-class Crucibot < Formula
+class Hooks < Formula
   desc 'usefull stuff and goodies'
   homepage 'https://github.com/viggin543/homebrew-innovidcellar'
   url 'https://github.com/viggin543/homebrew-innovidcellar/archive/1.2.1.tar.gz'
