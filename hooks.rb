@@ -7,6 +7,7 @@ class Hooks < Formula
 
   def install
     bin.install 'clone'
+    puts etc
     hooks = ENV['HOME']+"/bin/git-hooks"
   unless File.exist?(hooks)
     FileUtils.mv('git-hooks', hooks)
