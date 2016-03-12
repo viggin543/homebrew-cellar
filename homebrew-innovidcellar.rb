@@ -12,11 +12,21 @@ class HomebrewInnovidcellar < Formula
   depends_on "pandoc"
   depends_on "xmlstarlet"
   depends_on "curl"
-  depends_on "colorize" => :ruby
 
+  def tryInstallCrucibotRubyDependencies(sudo)
+      ["colorize","optparse","uri",'json','net/http'].each {|dependency| system " #{sudo} gem install  #{dependency}"}
+  end
+  def installCrucibotRubyDependencies
+    begin
+      tryInstallCrucibotRubyDependencies ""
+    rescue Exception => e
+      tryInstallCrucibotRubyDependencies "sudo"
+    end
+  end
 
   def install
     bin.install "tip"
+    installCrucibotRubyDependencies
     bin.install "crucibot"
   end
 end
