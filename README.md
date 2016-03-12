@@ -2,8 +2,12 @@
 usage
 
  `$ brew tap viggin543/hombrew-innovidcellar`
- `$ brew install --debug --verbose homebrew-innovidCellar`
- `$ tip` , `$ crucibot`
+ 
+ `$ brew install homebrew-innovidCellar`
+ 
+ `$ tip` ,
+ `$ crucibot` ,
+ `$ crucibot-pre-push-extend`
 
 
 # enjoy and feel free to add more  stuff ^_^
