@@ -1,8 +1,8 @@
 class Hooks < Formula
   desc 'usefull stuff and goodies'
   homepage 'https://github.com/viggin543/homebrew-innovidcellar'
-  url 'https://github.com/viggin543/homebrew-innovidcellar/archive/1.2.2.tar.gz'
-  version '1.2.1'
+  url 'https://github.com/viggin543/homebrew-innovidcellar/archive/1.2.3.tar.gz'
+  version '1.2.3'
   sha256 ''
 
   def install
