@@ -2,7 +2,7 @@
 #                http://www.rubydoc.info/github/Homebrew/homebrew/master/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 
-class tip < Formula
+class Tip < Formula
   desc "usefull stuff and goodies"
   homepage "https://github.com/viggin543/innovidCellar"
   url "https://github.com/viggin543/homebrew-innovidcellar/archive/1.1.1.zip"
