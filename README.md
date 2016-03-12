@@ -7,10 +7,13 @@ usage
  
  `$ brew install crucibot`
  
- `$ tip` ,
- `$ crucibot` ,
- `$ crucibot-pre-push-extend`
+ `$ brew install hooks` 
+ 
+ `$ tip` 
 
+ `$ clone  => will clone a repository using pre-push and prepare-commit-msg hooks . integrated with crucibot`
+ 
+ ```^___^```
 
 # enjoy and feel free to add more  stuff ^_^
  
