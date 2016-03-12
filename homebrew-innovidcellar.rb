@@ -5,9 +5,9 @@
 class HomebrewInnovidcellar < Formula
   desc "usefull stuff and goodies"
   homepage "https://github.com/viggin543/innovidCellar"
-  url "https://github.com/viggin543/homebrew-innovidcellar/archive/1.1.0.tar.gz"
-  version "1.1.0"
-  sha256 "350e897bdc6263a197e18a0f58473db08b4a004db7ff7396c4d4899d1459551e"
+  url "https://github.com/viggin543/homebrew-innovidcellar/archive/1.1.1.zip"
+  version "1.1.1"
+  sha256 "5b40588a51feab410a473fa43bcacda61ecb8aa155424541b521493533e7ffee"
 
   depends_on "pandoc"
   depends_on "xmlstarlet"
