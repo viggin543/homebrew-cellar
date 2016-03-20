@@ -6,7 +6,10 @@
 
 #usage
  
- `$ brew install tip =>`
+ `$ brew install tip `
+
+
+
 
 
 
@@ -14,12 +17,18 @@
                 `will insall a nice script $tip that prints random shell script + unix wisdom . `
 
 
+
+
+
  
- `$ brew install hooks => 
+ `$ brew install hooks  `
 
 
 
-                   everything you need to install all the git-hooks and crucibot`   
+
+
+
+                 `  everything you need to install all the git-hooks and crucibot`   
 
 
 USAGE EXAMPLE:
