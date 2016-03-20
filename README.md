@@ -1,8 +1,10 @@
-#usage
+#install
 
  `$ brew tap IgorDomrev/homebrew-innovidcellar https://bitbucket.org/IgorDomrev/homebrew-innovidcellar`
 
 
+
+#usage
  
  `$ brew install tip =>`
 
