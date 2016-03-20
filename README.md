@@ -11,7 +11,7 @@
 
 
   
-                `will insall a nice script $tip that prints random shell script + unix wisdom . TRY IT ! .  jyst tipe tip in terminal`
+                `will insall a nice script $tip that prints random shell script + unix wisdom . `
 
 
  
