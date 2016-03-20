@@ -1,7 +1,6 @@
-
 #usage
 
- `$ brew tap viggin543/hombrew-innovidcellar`
+ `$ brew tap IgorDomrev/homebrew-innovidcellar https://bitbucket.org/IgorDomrev/homebrew-innovidcellar`
  
  `$ brew install tip =>`
  
@@ -20,4 +19,4 @@
  
 # this repo will contain goodies and usefull stuff like the tip script 
 
-# consider brew update b4 using the tap . to pull latest changes 
+# consider brew update b4 using the tap . to pull latest changes
