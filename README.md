@@ -33,7 +33,13 @@
 
 USAGE EXAMPLE:
  
- `$ clone git@bitbucket.org:innovid/mobile-apps.git  =>`
+ `$ clone git@bitbucket.org:innovid/mobile-apps.git  `
+
+
+
+
+
+
 
 
 
