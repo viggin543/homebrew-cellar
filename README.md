@@ -3,11 +3,12 @@
 
  `$ brew tap viggin543/hombrew-innovidcellar`
  
- `$ brew install tip`
+ `$ brew install tip =>`
+ 
+ `will insall a nice script $tip that prints random shell script + unix wisdom . TRY IT ! .  jyst tipe tip in terminal`
  
  `$ brew install hooks => everything you need to install all the git-hooks and crucibot`   
  
- `$ tip` 
 
  `$ clone git@bitbucket.org:innovid/mobile-apps.git  =>`
  
