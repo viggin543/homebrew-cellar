@@ -4,8 +4,8 @@
 
 class Tip < Formula
   desc "usefull stuff and goodies"
-  homepage "http://github.com/viggin543/homebrew-innovidcellar"
-  url "https://bitbucket.org/IgorDomrev/homebrew-innovidcellar", :using => :git, :tag => "1.2.3"
+  homepage "http://github.com/viggin543/iggiCellar"
+  url "http://github.com/viggin543/iggiCellar", :using => :git, :tag => "1.2.4"
 
   depends_on "pandoc"
   depends_on "xmlstarlet"
