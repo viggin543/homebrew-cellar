@@ -6,7 +6,6 @@ class Tip < Formula
   desc "usefull stuff and goodies"
   homepage "http://github.com/viggin543/homebrew-innovidcellar"
   url "https://bitbucket.org/IgorDomrev/homebrew-innovidcellar", :using => :git, :tag => "1.2.3"
-  sha256 "5b40588a51feab410a473fa43bcacda61ecb8aa155424541b521493533e7ffee"
 
   depends_on "pandoc"
   depends_on "xmlstarlet"

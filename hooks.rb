@@ -1,9 +1,7 @@
 class Hooks < Formula
   desc 'usefull stuff and goodies'
   homepage 'http://github.com/viggin543/homebrew-innovidcellar'
-  url 'http://github.com/viggin543/homebrew-innovidcellar/archive/1.2.3.tar.gz'
-  version '1.2.3'
-  sha256 ''
+  url "https://bitbucket.org/IgorDomrev/homebrew-innovidcellar", :using => :git, :tag => "1.2.3"
 
   depends_on "crucibot"
 
