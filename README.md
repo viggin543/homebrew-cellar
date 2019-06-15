@@ -1,6 +1,6 @@
 #install
 
- `$ brew tap viggin543/homebrew-iggi https://github.com/viggin543/homebrew-iggi`
+ `$ brew tap viggin543/homebrew-cellar https://github.com/viggin543/homebrew-cellar`
 
 
 
